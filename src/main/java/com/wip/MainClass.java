@@ -1,50 +1,22 @@
 package com.wip;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-public class MainClassTest {
-
-	MainClass mc;
-
-	@BeforeClass
-	public static void setUpClass() {
-		System.out.println("From SetupClass method");
+public class MainClass {
+	
+	public int add(int... number) {
+		int result=0;
+		for(int i : number) {
+			result = result +i;
+		}		
+		return result;
+	}
+	
+	public int multiply(int a, int b) {
+		return a*b;
 	}
 
-	@Before
-	public void setUp() {
-		System.out.println("From Setup method");
-		mc = new MainClass();
-	}
+	public static void main(String[] args) {
+		System.out.println("Java within Kubernetes K*****8 Jenkins ADDED-- Maven Project!!!");
 
-	@Test
-	public void testAdd() {
-		System.out.println("From add method");
-		assertEquals(60, mc.add(20, 20, 20));
-	}
-
-	@Test
-	public void testMultiply() {
-		System.out.println("From multiply method");
-		assertEquals(100, mc.multiply(10, 10));
-	}
-
-	@After
-	public void tearDown() {
-		System.out.println("From TEAR Down  method");
-		mc = null;
-
-	}
-
-	@AfterClass
-	public static void tearDownClass() {
-		System.out.println("From tearDownClass method");
 	}
 
 }
