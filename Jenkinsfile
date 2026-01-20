@@ -11,57 +11,63 @@ pipeline {
         git branch: 'main', credentialsId: 'Git-Cred', url: 'https://github.com/aravindwip/k8test.git'
       }
     }
+
     stage('Test Code') {
       steps {
         echo 'JUNIT Test case execution started'
         bat 'mvn clean test'
-        
       }
       post {
         always {
-		  junit '**/target/surefire-reports/*.xml'
+          junit '**/target/surefire-reports/*.xml'
           echo 'Test Run is SUCCESSFUL!'
         }
-
       }
     }
+
     stage('Build Project') {
       steps {
         echo 'Building Java project'
         bat 'mvn clean package -DskipTests'
       }
     }
+
     stage('Build the Docker Image') {
       steps {
         echo 'Building Docker Image'
         bat 'docker build -t myindiaproj:1.0 .'
       }
     }
+
     stage('Push Docker Image to DockerHub') {
       steps {
-        echo 'Pushing  Docker Image'
+        echo 'Pushing Docker Image'
         withCredentials([string(credentialsId: 'Doc-hub', variable: 'DOCKER_PASS')]) {
-  	      bat '''
-          echo %DOCKER_PASS% | docker login -u aravind1721 --password-stdin
-          docker tag myjavaproj:1.0 aravind1721/myindiaproj:1.0
-          docker push aravind1721/myindiaproj:1.0
-          '''}
+          bat '''
+            echo %DOCKER_PASS% | docker login -u aravind1721 --password-stdin
+            docker tag myindiaproj:1.0 aravind1721/myindiaproj:1.0
+            docker push aravind1721/myindiaproj:1.0
+          '''
+        }
       }
     }
-    /*stage('Run Docker Container') {
+
+    /* Optional: Run Docker Container
+    stage('Run Docker Container') {
       steps {
         echo 'Running Java Application'
         bat '''
-        docker rm -f myjavaproj-container || exit 0
-        docker run --name myjavaproj-container myjavaproj:1.0
-        
-        '''               
+          docker rm -f myindiaproj-container || exit 0
+          docker run --name myindiaproj-container myindiaproj:1.0
+        '''
       }
-    }*/
+    }
+    */
   }
+
   post {
     success {
-      echo 'BUild and Run is SUCCESSFUL!'
+      echo 'Build and Run is SUCCESSFUL!'
     }
     failure {
       echo 'OOPS!!! Failure.'
