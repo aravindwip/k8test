@@ -43,7 +43,7 @@ pipeline {
         withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'DOCKER_PASS')]) {
   	      bat '''
           echo %DOCKER_PASS% | docker login -u aravind1721 --password-stdin
-          docker tag myjavaproj:1.0 aravind1721/myindiaproj:1.0
+          docker tag myindiaproj:1.0 aravind1721/myindiaproj:1.0
           docker push aravind1721/myindiaproj:1.0
           '''}
       }
