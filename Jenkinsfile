@@ -48,17 +48,7 @@ pipeline {
           '''}
       }
     }
-    /*stage('Run Docker Container') {
-      steps {
-        echo 'Running Java Application'
-        bat '''
-        docker rm -f myjavaproj-container || exit 0
-        docker run --name myjavaproj-container myjavaproj:1.0
-        
-        '''               
-      }
-    }*/
-  }
+ }
   post {
     success {
       echo 'BUild and Run is SUCCESSFUL!'
