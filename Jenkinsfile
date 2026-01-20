@@ -2,13 +2,13 @@ pipeline {
   agent any
   tools {
     jdk 'Java17'
-    maven 'Maven'
+    maven 'Maven-home'
   }
   stages {
     stage('Checkout Code') {
       steps {
         echo 'Pulling from Github'
-        git branch: 'main', credentialsId: 'mygithubcred', url: 'https://github.com/chntraining/k8test.git'
+        git branch: 'main', credentialsId: 'Git-Cred', url: 'https://github.com/aravindwip/k8test.git'
       }
     }
     stage('Test Code') {
@@ -40,11 +40,11 @@ pipeline {
     stage('Push Docker Image to DockerHub') {
       steps {
         echo 'Pushing  Docker Image'
-        withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'DOCKER_PASS')]) {
+        withCredentials([string(credentialsId: 'Doc-hub', variable: 'DOCKER_PASS')]) {
   	      bat '''
-          echo %DOCKER_PASS% | docker login -u deepikkaa20 --password-stdin
-          docker tag myjavaproj:1.0 deepikkaa20/myindiaproj:1.0
-          docker push deepikkaa20/myindiaproj:1.0
+          echo %DOCKER_PASS% | docker login -u aravind1721 --password-stdin
+          docker tag myjavaproj:1.0 aravind1721/myindiaproj:1.0
+          docker push aravind1721/myindiaproj:1.0
           '''}
       }
     }
