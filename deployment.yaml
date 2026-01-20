@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: indiaproj-container
-        image: deepikkaa20/indiaproj:latest
+        image: aravind1721/indiaproj:latest
         ports:
         - containerPort: 80
