@@ -63,8 +63,8 @@ pipeline {
       steps {
         echo 'Deploying application to Minikube'
         // assumes you have k8s/deployment.yaml and k8s/service.yaml in your repo
-        bat 'kubectl apply -f k8s/deployment.yaml'
-        bat 'kubectl apply -f k8s/service.yaml'
+        bat 'kubectl apply -f deployment.yaml'
+        bat 'kubectl apply -f service.yaml'
       }
     }
 
