@@ -61,8 +61,7 @@ pipeline {
 
     stage('Deploy to Minikube') {
       steps {
-        echo 'Deploying application to Minikube'
-        // assumes you have k8s/deployment.yaml and k8s/service.yaml in your repo
+        echo 'Deploying application to Minikube'        
         bat 'kubectl apply -f deployment.yaml'
         bat 'kubectl apply -f service.yaml'
       }
